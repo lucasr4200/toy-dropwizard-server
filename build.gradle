@@ -19,6 +19,7 @@ repositories {
 
 dependencies {
     implementation 'io.dropwizard:dropwizard-core:1.3.2'
+    implementation("com.google.guava:guava:33.0.0-jre")
 
     // Reference: https://www.baeldung.com/junit-5-gradle
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
