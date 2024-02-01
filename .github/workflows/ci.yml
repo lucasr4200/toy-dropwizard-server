@@ -11,6 +11,27 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
+      - name: Run the server
+        working-directory: .
+        run: |
+          chmod +x gradlew
+          docker-compose up --build -d
+
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: '3.x'
+
+      - run: pip install pytest requests
+
+      - name: Run system test
+        working-directory: .
+        run: pytest
+
+      - name: Stop the server
+        working-directory: .
+        run: docker-compose down
+
       - name: Set up Java
         uses: actions/setup-java@v1
         with:
@@ -22,8 +43,8 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew build -x test
-      
-
+          
+          
       - name: Run tests
         working-directory: .
         run: |
